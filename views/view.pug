@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  h1 Recorded requests
+
+  // Store data in div to allow request from addon
+  div(id='requests', hidden='true', data-requests=JSON.stringify(requests))
+
+  // Pass requests to client
+  script(type='text/javascript').
+    var requests = !{JSON.stringify(requests)};
+
+  span Hostname:
+  div
+    input(type='text', name='host', id='host', value='http://localhost')
+  br
+  div
+    button(type='button', id='reloadData', onclick='reloadData()') Reload Requests
+
+  // List is filled via Javascript
+  ul(id='requestList')
